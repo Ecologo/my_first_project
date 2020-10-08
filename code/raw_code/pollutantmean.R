@@ -1,13 +1,13 @@
-library(stringr)
+require("stringr")
 
 url = "https://d396qusza40orc.cloudfront.net/rprog%2Fdata%2Fspecdata.zip"
 
-if(!file.exists("./data/raw_data/specdata.zip")){
-  download.file(url,"./data/raw_data/specdata.zip",mode="wb")
+if(!file.exists("specdata.zip")){
+  download.file(url,"specdata.zip",mode="wb")
 }
 
-if(!dir.exists("./data/raw_data/specdata")){
-  unzip("./data/raw_data/specdata.zip",overwrite = TRUE)
+if(!dir.exists("specdata")){
+  unzip("specdata.zip",overwrite = TRUE)
 }
 
 pollutantmean = function(directory, pollutant, id = 1:332){
@@ -21,6 +21,5 @@ pollutantmean = function(directory, pollutant, id = 1:332){
     tb_clean = tb_raw[!is.na(tb_raw[pollutant]),]
     values = c(values,tb_clean[[pollutant]])
   }
-  
   mean(values)
 }
